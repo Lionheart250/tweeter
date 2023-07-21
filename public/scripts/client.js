@@ -1,65 +1,106 @@
-$(document).ready(function() {
-  // Get the textarea element and the counter element
-  const textarea = $("#tweet-text");
-  const counter = $("output[name='counter']");
+$(document).ready(function () {
+  const $tweetForm = $("#tweet-form");
+  const $errorElement = $(".error-message");
   const maxLength = 140;
-
-  // Add an input event listener to the textarea
-  textarea.on("input", function() {
-    // Get the current length of the textarea value
-    const currentLength = textarea.val().length;
-    // Calculate the remaining characters
-    const remainingChars = maxLength - currentLength;
-    // Update the counter value
-    counter.text(remainingChars);
-
-    // Disable textarea if character limit is exceeded
-    if (remainingChars < 0) {
-      textarea.addClass("exceeded-limit");
-    } else {
-      textarea.removeClass("exceeded-limit");
-    }
-  });
-
-  // Assume that the tweet object has the following structure:
-  // const tweet = {
-  //   user: {
-  //     name: "JohnDoe",
-  //     avatars: "profile-picture.jpg",
-  //     handle: "@johndoe",
-  //   },
-  //   content: {
-  //     text: "This is the content of the tweet.",
-  //   },
-  //   created_at: 1627023249000, // Timestamp in milliseconds
-  // };
-
+  const escape = function (str) {
+    let div = document.createElement("div");
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  };
+  const catImageUrls = [
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQamZ_bKNOfqoxHnubh23L9k4tmy35eRtY3xQ&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxY80Zy4D4bQ9aTqaTZQewQ6f_eTsWTGx621m8lrEvvJZGX_jg9gHafgztUBFL6KLWlLI&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDSy0TuTeLfy2KcUBFsvNCghU3l98gsfMMOA&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEzIxhh1uUKRxOHfp84LOn0by_VCVTGcBJGA&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBpqlczOmiZTus_TMl8FpCSBBlVKDLgR4AVQ&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhxw-pP9I8A-Oo3y-5FHjv1zHYbX_SpL0CeA&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgCV1i_EguyIbOyyEdTCJDJOAi__ulwu8x-g&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHGw5tniNRIukovQDn9xblZYsW5-NRwvB2bA&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_exHw-9sfp5krCnRm8KGnUD6tpJ27HUYuKg&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3vaTlhacFibyvDpkFnPzNfmSgKZ-9gMG-myAeqnQ1_kRPaXwT19lXDbpgszQ8TD3hXYY&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4p4z_w_GuVcHAQ113WxpexDuuVibbddmoGg&usqp=CAU",
+  ];
+  
+  // Function to create a new tweet element
   function createTweetElement(tweet) {
-    // ... Your existing createTweetElement function ...
+    // Format the created_at timestamp into a readable date
+    const date = new Date(tweet.created_at);
+    const formattedDate = date.toLocaleString();
+
+    // Construct the HTML markup for the tweet element
+    const randomCatImageUrl = catImageUrls[Math.floor(Math.random() * catImageUrls.length)];
+    const $tweet = $("<article>").addClass("tweet");
+    const $header = $("<header>");
+    const $userInfo = $("<div>").addClass("user-info");
+    const $userAvatar = $("<img>").addClass("user-avatar").attr("src", randomCatImageUrl).attr("alt", "User Profile Picture");
+    const $username = $("<span>").addClass("username").text(tweet.user.name);
+    const $userHandle = $("<span>").addClass("handle").text(tweet.user.handle);
+    const $tweetContent = $("<div>").addClass("tweet-content").append($("<p>").text(tweet.content.text));
+    const $footer = $("<footer>");
+    const $icons = $("<div>").addClass("icons");
+    const $heartIcon = $("<i>").addClass("far fa-heart");
+    const $retweetIcon = $("<i>").addClass("fas fa-retweet");
+    const $flagIcon = $("<i>").addClass("fas fa-flag");
+
+    // Timeago element to display time passed since tweet creation
+    const $timeAgo = $("<time>").addClass("time-ago").attr("datetime", formattedDate).text(formattedDate);
+
+    // Append elements to build the tweet structure
+    $userInfo.append($userAvatar, $username);
+    $header.append($userInfo, $userHandle);
+    $icons.append($heartIcon, $retweetIcon, $flagIcon);
+    $footer.append($icons, $timeAgo); // Append the timeago element to the footer
+
+    // Assemble all parts to create the final tweet element
+    $tweet.append($header, $tweetContent, $footer);
 
     return $tweet;
   }
 
-  // Assume you have a tweet container element with ID "tweet-container"
-  const $tweetContainer = $("#tweet-container");
+  // Function to render tweets in the container
+  function renderTweets(tweets) {
+    // Clear the existing tweets in the container
+    $("#tweet-container").empty();
 
-  // Assume you have a list of tweet objects stored in an array called "tweets"
-  for (const tweet of tweets) {
-    const $tweetElement = createTweetElement(tweet);
-    $tweetContainer.append($tweetElement);
+    for (const tweet of tweets) {
+      const $tweetElement = createTweetElement(tweet);
+      $("#tweet-container").prepend($tweetElement);
+    }
   }
 
-  // Handle form submission
-  $("#tweet-form").on("submit", function(event) {
+  // Function to load tweets from the server
+  function loadTweets() {
+    $.ajax({
+      url: "/tweets",
+      method: "GET",
+      dataType: "JSON",
+      success: function (response) {
+        renderTweets(response);
+      },
+      error: function (error) {
+        console.error("Error loading tweets:", error);
+      }
+    });
+  }
+
+  // Call the loadTweets function to load tweets on page load
+  loadTweets();
+
+  $("#tweet-form").submit(function (event) {
     event.preventDefault(); // Prevent form submission from reloading the page
 
-    // Get the tweet text from the textarea
+    // Hide the error message before proceeding with validation
+    $errorElement.slideUp();
+
     const tweetText = $("#tweet-text").val();
 
-    // Check if the tweet text is valid (optional)
+    // Validation logic
     if (!tweetText.trim()) {
-      // Add code to handle empty tweets or any other validation
-      return;
+      $errorElement.text("Tweet content cannot be empty.").slideDown();
+      return; // Abort form submission
+    } else if (tweetText.length > maxLength) {
+      $errorElement.text("Tweet content is too long. Maximum " + maxLength + " characters allowed.").slideDown();
+      return; // Abort form submission
     }
 
     // Create a new tweet object with the tweet content and other properties as needed
@@ -69,18 +110,31 @@ $(document).ready(function() {
         avatars: "profile-picture.jpg",
         handle: "@yourhandle",
       },
-      content: {
-        text: tweetText,
-      },
+      text: tweetText, // Use "text" instead of "content.text" for the tweet content
       created_at: Date.now(), // Current timestamp in milliseconds
     };
+    
+    // Send the new tweet data to the server using AJAX
+    $.ajax({
+      url: "/tweets",
+      method: "POST",
+      data: newTweet,
+      dataType: "JSON",
+      success: function (response) {
+        const $newTweetElement = createTweetElement(response);
+        $("#tweet-container").prepend($newTweetElement);
 
-    // Render the new tweet
-    const $newTweetElement = createTweetElement(newTweet);
-    $tweetContainer.prepend($newTweetElement);
-
-    // Clear the textarea and reset the counter
-    $("#tweet-text").val("");
-    counter.text(maxLength);
+        // Clear the textarea and reset the counter
+        $("#tweet-text").val("");
+        $("#tweet-text").siblings('.counter').text(maxLength);
+      },
+      error: function (err) {
+        console.error("Error sending tweet:", err);
+        $errorElement.text("Error sending tweet. Please try again later.").slideDown();
+      }
+    });
   });
+
+  // Timeago initialization
+  $("time.time-ago").timeago();
 });

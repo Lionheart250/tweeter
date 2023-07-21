@@ -1,13 +1,12 @@
 "use strict";
 
-const userHelper    = require("../lib/util/user-helper")
+const userHelper = require("../lib/util/user-helper");
+const express = require('express');
+const tweetsRoutes = express.Router();
 
-const express       = require('express');
-const tweetsRoutes  = express.Router();
+module.exports = function (DataHelpers) {
 
-module.exports = function(DataHelpers) {
-
-  tweetsRoutes.get("/", function(req, res) {
+  tweetsRoutes.get("/", function (req, res) {
     DataHelpers.getTweets((err, tweets) => {
       if (err) {
         res.status(500).json({ error: err.message });
@@ -17,9 +16,9 @@ module.exports = function(DataHelpers) {
     });
   });
 
-  tweetsRoutes.post("/", function(req, res) {
-    if (!req.body.text) {
-      res.status(400).json({ error: 'invalid request: no data in POST body'});
+  tweetsRoutes.post("/", function (req, res) {
+    if (!req.body || !req.body.text) {
+      res.status(400).json({ error: 'Invalid request: no data in POST body or missing "text" field' });
       return;
     }
 
@@ -36,7 +35,8 @@ module.exports = function(DataHelpers) {
       if (err) {
         res.status(500).json({ error: err.message });
       } else {
-        res.status(201).send();
+        // Send the newly created tweet back to the client
+        res.status(201).json(tweet);
       }
     });
   });

@@ -1,36 +1,60 @@
-/*
- * http://www.paulirish.com/2012/box-sizing-border-box-ftw/
- * https://css-tricks.com/international-box-sizing-awareness-day/
- * Do not modify these two selectors, please
- */
- html {
-  box-sizing: border-box;
-}
-
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
-/*
- * Global layout stuff
- */
-
-nav .logo {
-  font-family: 'Bungee', sans-serif;
-  margin-right: auto;
+main {
+  width: 90%;
+  background-color: #4056A1; /* Same background color as the <body> element */
+  color: #ffffff; /* Text color for the content inside <main> */
+  margin: 0 auto; /* Center align the <main> element to the body */
+  padding: 0px; /* Optional padding for better readability */
 }
 
 body {
-  color: black;  
-  background-color: #82beb4;
-  font-size: 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  background-color: #4056A1;
 }
 
-main {
-  width: 90%;
-  background-color: inherit;
-  color: black;
+/* Common styles for all screen sizes */
+/* ... */
+
+/* Mobile (up to 767px) */
+@media (max-width: 767px) {
+  /* Stack elements vertically */
+  header,
+  .new-tweet,
+  .tweet {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+  header,
+  .new-tweet {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .tweet {
+    width: 100%;
+  }
+
+/* Desktop (1024px and above) */
+@media (min-width: 1024px) {
+  /* Show header and tweet form on the left, tweets on the right */
+  .main-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  header,
+  .new-tweet {
+    width: 30%;
+    margin-bottom: 20px;
+  }
+
+  .tweet {
+    width: 65%; /* Adjust this value based on your preferences */
+    margin-bottom: 20px;
+  }
+  
+  #tweet-container {
+    width: 30%; /* Adjust this value based on your preferences */
+  }
 }
