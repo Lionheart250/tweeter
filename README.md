@@ -23,5 +23,5 @@ This repository is the starter code for the project: Students will fork and clon
 
 ## Screenshots
 
-!["Screenshot of desktop mode"] (https://github.com/Lionheart250/tweeter/blob/master/docs/tweeter%20pic.png?raw=true)
-!["Screenshot of mobile"] (https://github.com/Lionheart250/tweeter/blob/master/docs/tweeter%20pic%202.png?raw=true)
+!["Screenshot of desktop mode"](https://github.com/Lionheart250/tweeter/blob/master/docs/tweeter%20pic.png?raw=true)
+!["Screenshot of mobile"](https://github.com/Lionheart250/tweeter/blob/master/docs/tweeter%20pic%202.png?raw=true)
