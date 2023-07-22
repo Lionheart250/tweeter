@@ -58,3 +58,61 @@ body {
     width: 30%; /* Adjust this value based on your preferences */
   }
 }
+
+.tweet:hover {
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+}
+
+
+
+/* Styles for the tweet article */
+main {
+  margin: 0;
+}
+
+#tweet-container {
+  width: 90%;
+  margin: auto;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  transition: box-shadow 0.2s ease;
+  padding-right: 20px;
+  padding-left: 0;
+  max-width: 100%;
+  background-color: #4056A1;
+}
+
+.tweet-container {
+  max-width: 100%;
+  margin: auto;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  transition: box-shadow 0.2s ease;
+  padding-right: 30px;
+}
+
+article.tweet {
+  max-width: 100%;
+  margin: auto;
+  background-color: aliceblue;
+  padding: 2px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  transition: box-shadow 0.2s ease;
+}
+
+.tweet:hover {
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+}
+
+.counter-container {
+  display: flex;
+  align-items: center; /* Align the items vertically in the center */
+}
+
+/* Move the character counter to the right */
+.counter {
+  margin-left: auto;
+}

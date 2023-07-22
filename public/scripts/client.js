@@ -126,7 +126,7 @@ $(document).ready(function () {
 
         // Clear the textarea and reset the counter
         $("#tweet-text").val("");
-        $("#tweet-text").siblings('.counter').text(maxLength);
+        $("#tweet-text").closest('.counter-container').find('.counter').text(maxLength);
       },
       error: function (err) {
         console.error("Error sending tweet:", err);

@@ -47,10 +47,6 @@ article.tweet {
 }
 
 
-article.tweet:hover {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add box shadow on hover */
-}
-
 article.tweet header {
   display: flex;
   flex-direction: row;
@@ -121,3 +117,4 @@ article.tweet footer p.time-ago {
 article.tweet footer p.datetime {
   margin-left: auto; /* Move the datetime to the right */
 }
+
