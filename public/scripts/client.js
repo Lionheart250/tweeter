@@ -86,6 +86,10 @@ $(document).ready(function () {
   // Call the loadTweets function to load tweets on page load
   loadTweets();
 
+  function resetCharacterCounter() {
+    $("#tweet-form").find('.output .counter').text(maxLength);
+  }
+
   $("#tweet-form").submit(function (event) {
     event.preventDefault(); // Prevent form submission from reloading the page
 
@@ -123,15 +127,14 @@ $(document).ready(function () {
       success: function (response) {
         const $newTweetElement = createTweetElement(response);
         $("#tweet-container").prepend($newTweetElement);
-
+      
         // Clear the textarea and reset the counter
         $("#tweet-text").val("");
-        $("#tweet-text").closest('.counter-container').find('.counter').text(maxLength);
+        resetCharacterCounter(); // Reset the character counter to 140
+      
+        // Manually trigger the input event to update the counter immediately
+        $("#tweet-text").trigger("input");
       },
-      error: function (err) {
-        console.error("Error sending tweet:", err);
-        $errorElement.text("Error sending tweet. Please try again later.").slideDown();
-      }
     });
   });
 

@@ -1,18 +1,19 @@
 /* CSS for the header element */
+
+
 header {
-  background-color: #F26C4F; /* Set a different background color for the header */
-  height: 620px; /* Set the height of the visible portion of the header */
+  background-color: #d1b92e; /* Set a different background color for the header */
+  height: 720px; /* Set the height of the visible portion of the header */
   width: 100%; /* Set the width to be 100% of its parent container */
   display: flex;
   flex-direction: column;
   justify-content: center; /* Center the content vertically */
   align-items: center; /* Center the content horizontally */
-  background-image: "https://www.transparenttextures.com/patterns/buried.png";
-  opacity: 5;
+  background-image: url("https://www.transparenttextures.com/patterns/buried.png");
 }
 
 header img {
-  width: 100%;
+  width: 400px;
   max-height: 300px;
   border-radius: 50%;
 }

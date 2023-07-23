@@ -1,4 +1,5 @@
 /* Styles for the tweet article */
+
 main {
   margin: 0;
 }
@@ -6,7 +7,7 @@ main {
 #tweet-container {
   width: 90%;
   margin: auto;
- 
+  height: 100%;
   padding: 10px;
   border-radius: 6px;
   margin-bottom: 20px;
@@ -14,32 +15,35 @@ main {
   padding-right: 20px;
   padding-left: 0;
   max-width: 100%;
-  background-color: #4056A1;
+  background-color: #ffffff;
 }
-.tweet-container {
-  max-width: 100%; /* Set the maximum width to 90% */
-  margin: auto; /* Center the tweets horizontally in the container */
 
+.tweet-container {
+  max-width: 100%;
+  margin: auto;
+  height: 100%;
   padding: 10px;
   border-radius: 6px;
   margin-bottom: 20px;
   transition: box-shadow 0.2s ease;
   padding-right: 30px;
 }
-article.tweet {
-  max-width: 100%; /* Set the maximum width to 90% */
-  margin: auto; /* Center the tweets horizontally in the container */
 
+article.tweet {
+  max-width: 100%;
+  margin: auto;
   padding: 10px;
   border-radius: 6px;
   margin-bottom: 20px;
   transition: box-shadow 0.2s ease;
+  border: 1px solid black;
 }
+
 .tweet {
   width: 100%;
   margin: auto;
-  background-color: aliceblue;
-
+  background-color: rgb(255, 255, 255);
+  height: 100%;
   padding: 2px;
   border-radius: 6px;
   margin-bottom: 20px;
@@ -51,7 +55,7 @@ article.tweet header {
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 150px;
+  height: 100px;
   padding: 1px;
 }
 
@@ -82,10 +86,11 @@ article.tweet footer {
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
-  justify-content: space-between; /* Align the icons to the far right */
+  justify-content: space-between;
   background-color: rgba(255, 255, 255, 0.8);
   padding: 5px;
-  width: 100%; /* Make the footer span the full width */
+  width: 100%;
+  /* Make the footer span the full width */
 }
 
 article.tweet footer .icons {
@@ -107,14 +112,16 @@ article.tweet footer .icons i:last-child {
 }
 
 article.tweet footer p {
-  margin: 0; /* Remove any default margin on the elements */
+  margin: 0;
+  /* Remove any default margin on the elements */
 }
 
 article.tweet footer p.time-ago {
-  order: 1; /* Move the time-ago to the left */
+  order: 1;
+  /* Move the time-ago to the left */
 }
 
 article.tweet footer p.datetime {
-  margin-left: auto; /* Move the datetime to the right */
+  margin-left: auto;
+  /* Move the datetime to the right */
 }
-

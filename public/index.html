@@ -100,54 +100,51 @@
     </div>
   </nav>
 
-  <header>
-    <div>
+  <div class="container"> <!-- New container added -->
+    <header>
       <img src="https://i.seadn.io/gae/Fq2s8emvSaWz3BtoCaJ0XWSrL3vXNJtOi1nOQcua-7aqe9wQN-rG3vguUvBvjIgkMjA0Df_hDnFxrSAlmaiSaz-oK-Exz5qoiCtB?auto=format&dpr=1&w=1000">
-    </div>
-    <br>
-    <div>
+      <br>
       <h2>Your name</h2>
+    </header>
+
+    <div class="main-container">
+      <section class="new-tweet">
+        <div class="error-message"></div>
+        <h2></h2>
+        <form id="tweet-form">
+          <label for="tweet-text">What are you humming about?</label>
+          <textarea name="text" id="tweet-text"></textarea>
+          <div class="counter-container">
+            <button type="submit">Tweet</button>
+            <output class="counter" name="counter" for="tweet-text">140</output>
+          </div>
+        </form>
+      </section>
+
+      <section id="tweet-container">
+        <!-- Existing tweets will be dynamically added here -->
+        <article class="tweet">
+          <header>
+            <div class="user-info">
+              <img src="profile-hex.png" alt="User Profile">
+              <h3>User Name</h3>
+              <p>@username</p>
+            </div>
+          </header>
+          <p class="tweet-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque euismod libero quis ipsum consequat tristique.</p>
+          <footer>
+            <div class="icons">
+              <i class="fas fa-flag"></i>
+              <i class="fas fa-retweet"></i>
+              <i class="fas fa-heart"></i>
+            </div>
+            <p class="time-ago">2 days ago</p>
+          </footer>
+        </article>
+      </section>
     </div>
-  </header>
-
-  <div class="main-container">
-    <section class="new-tweet">
-      <div class="error-message"></div>
-      <h2>Compose Tweet</h2>
-      <form id="tweet-form">
-        <label for="tweet-text">What are you humming about?</label>
-        <textarea name="text" id="tweet-text"></textarea>
-        <div class="counter-container">
-          <button type="submit">Tweet</button>
-          <output class="counter" name="counter" for="tweet-text">140</output>
-        </div>
-      </form>
-    </section>
-
-    <section id="tweet-container">
-      <!-- Existing tweets will be dynamically added here -->
-      <article class="tweet">
-        <header>
-          <div class="user-info">
-            <img src="profile-hex.png" alt="User Profile">
-            <h3>User Name</h3>
-            <p>@username</p>
-          </div>
-        </header>
-        <p class="tweet-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque euismod libero quis ipsum consequat tristique.</p>
-        <footer>
-          <div class="icons">
-            <i class="fas fa-flag"></i>
-            <i class="fas fa-retweet"></i>
-            <i class="fas fa-heart"></i>
-          </div>
-          <p class="time-ago">2 days ago</p>
-        </footer>
-      </article>
-    </section>
   </div>
   <!-- Rest of the HTML code -->
-
 </body>
 
 </html>
